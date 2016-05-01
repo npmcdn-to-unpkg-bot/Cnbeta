@@ -11,11 +11,6 @@
     "jscs": "jscs ."
   },
   "dependencies": {
-    "webpack": "^1.13.0",
-    "extract-text-webpack-plugin": "^0.8.2",
-    "html-webpack-plugin": "^1.6.1",
-    "stats-webpack-plugin": "^0.2.1",
-    "autoprefixer": "^6.0.3",
     "express": "^4.13.4",
     "react": "^15.0.2",
     "react-dom": "^15.0.2"
@@ -43,6 +38,11 @@
     "sinon": "^1.16.1",
     "sinon-chai": "^2.8.0",
     "style-loader": "^0.12.4",
+    "webpack": "^1.13.0",
+    "autoprefixer": "^6.0.3",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "html-webpack-plugin": "^1.6.1",
+    "stats-webpack-plugin": "^0.2.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.10.0"
   }
