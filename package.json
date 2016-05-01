@@ -5,8 +5,8 @@
     "test": "",
     "start": "node server",
     "start-prod": "NODE_ENV=production PORT=8080 node server",
-    "prepublish": "set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --profile --colors",
-    "build": "rimraf dist && npm run prepublish"
+    "postinstall": "set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --profile --colors",
+    "build": "rimraf dist && npm run postinstall"
   },
   "dependencies": {
     "express": "^4.13.4",
