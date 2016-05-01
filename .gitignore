@@ -2,7 +2,7 @@ node_modules
 coverage
 typings
 .DS_Store
-
+app/**/*.js
 
 *.log
 .idea
