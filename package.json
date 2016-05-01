@@ -3,6 +3,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server",
+    "ts": "tsc -p app -w",
     "prod": "npm run build && NODE_ENV=production PORT=8080 node server",
     "build": "rimraf dist && NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --profile --colors"
   },

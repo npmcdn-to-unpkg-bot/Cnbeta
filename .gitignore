@@ -1,5 +1,8 @@
 node_modules
-.DS_Store
-*.log
 coverage
+typings
+.DS_Store
+
+
+*.log
 .idea
