@@ -15,12 +15,12 @@
     "extract-text-webpack-plugin": "^0.8.2",
     "html-webpack-plugin": "^1.6.1",
     "stats-webpack-plugin": "^0.2.1",
+    "autoprefixer": "^6.0.3",
     "express": "^4.13.4",
     "react": "^15.0.2",
     "react-dom": "^15.0.2"
   },
   "devDependencies": {
-    "autoprefixer": "^6.0.3",
     "babel-eslint": "^4.1.6",
     "babel-jscs": "^2.0.5",
     "babel-loader": "^6.2.3",
