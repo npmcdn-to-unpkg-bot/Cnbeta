@@ -1,7 +1,7 @@
-export default ({ stories }) => {
-    const items = stories.map((story) => {
+export default ({ entries }) => {
+    const items = entries.map((entry) => {
        return (
-           <li>{story.title}</li>
+           <li>{entry.title}</li>
        ) 
     });
     return (

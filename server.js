@@ -27,9 +27,19 @@ const httpGet = (url, callback) => {
 
 const parseXml = (xml) => {
   const result = elementtree.parse(xml);
-  return result
+  const updated = result.findtext('./updated');
+  const entries = result
     .findall('./entry')
-    .map((node) => node.findtext('./title'));
+    .map((node) => ({
+      title: node.findtext('./title'),
+      link: node.find('./link').get('href'),
+      summary: node.findtext('./summary')
+    }));
+    
+  return {
+    updated,
+    entries
+  };
 };
 
 app.get('/rss', (req, res) => {
