@@ -2,8 +2,8 @@
 
 const path = require('path');
 const express = require('express');
-const xml2object = require('xml2object');
 const request = require('request');
+const xml2object = require('./lib/xml2object');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
