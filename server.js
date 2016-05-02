@@ -1,19 +1,46 @@
 /* eslint no-console: 0 */
 
 const path = require('path');
+const http = require("http");
 const express = require('express');
-const request = require('request');
-var et = require('elementtree');
+const elementtree = require('elementtree');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
 
+const httpGet = (url, callback) => {
+  http
+    .get(url, function (res) {
+      var body = '';
+      res.on('data', function (data) {
+        body += data;
+      });
+      res.on('end', function () {
+        callback(null, body);
+      });
+    })
+    .on('error', function (error) {
+      callback(error);
+    });
+}
+
+const parseXml = (xml) => {
+  const result = elementtree.parse(xml);
+  return result
+    .findall('./entry')
+    .map((node) => node.findtext('./title'));
+};
+
 app.get('/rss', (req, res) => {
   const url = 'http://rssdiy.com/u/2/cnbeta.xml';
-  request(url, function (error, response, body) {
-    const etree = et.parse(body);
-    const data = etree.findall('./entry').map((node) => node.findtext('./title'));
+  httpGet(url, function (error, body) {
+    if (error) {
+      res.json({ error });
+      return;
+    }
+    
+    const data = parseXml(body);
     res.json({ data });
   });
 });
