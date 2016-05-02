@@ -3,7 +3,7 @@
 const path = require('path');
 const express = require('express');
 const request = require('request');
-const xml2object = require('./lib/xml2object');
+var et = require('elementtree');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
@@ -11,18 +11,11 @@ const app = express();
 
 app.get('/rss', (req, res) => {
   const url = 'http://rssdiy.com/u/2/cnbeta.xml';
-  const parser = new xml2object([ 'feed' ]);
-  let data;
-  
-  parser.on('object', function(name, obj) {
-      data = obj;
+  request(url, function (error, response, body) {
+    const etree = et.parse(body);
+    const data = etree.findall('./entry').map((node) => node.findtext('./title'));
+    res.json({ data });
   });
-
-  parser.on('end', function() {
-      res.json({ data });
-  });
-  
-  request.get(url).pipe(parser.saxStream);
 });
 
 if (isDeveloping) {

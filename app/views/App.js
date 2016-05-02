@@ -24,7 +24,7 @@ export default class App extends React.Component {
             .then(res => res.json())
             .then((json) => {
                 this.setState({
-                    stories: json.data.entry
+                    stories: json.data.map((_) => ({ title: _ }))
                 });
             });
     }
