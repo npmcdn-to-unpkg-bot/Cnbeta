@@ -8,6 +8,7 @@
     "build": "rimraf dist && NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --profile --colors"
   },
   "dependencies": {
+    "aphrodite": "^0.3.1",
     "express": "^4.13.4",
     "react": "^15.0.2",
     "react-dom": "^15.0.2"

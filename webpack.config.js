@@ -17,7 +17,8 @@ module.exports = {
   },
   externals: {
     "react": 'React',
-    "react-dom": "ReactDOM"
+    "react-dom": "ReactDOM",
+    "aphrodite": "aphrodite"
   },
   plugins: [
     new HtmlWebpackPlugin({
