@@ -2,10 +2,28 @@
 
 const path = require('path');
 const express = require('express');
+const xml2object = require('xml2object');
+const request = require('request');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
+
+app.get('/rss', (req, res) => {
+  const url = 'http://rssdiy.com/u/2/cnbeta.xml';
+  const parser = new xml2object([ 'feed' ]);
+  let data;
+  
+  parser.on('object', function(name, obj) {
+      data = obj;
+  });
+
+  parser.on('end', function() {
+      res.json({ data });
+  });
+  
+  request.get(url).pipe(parser.saxStream);
+});
 
 if (isDeveloping) {
   const webpack = require('webpack');
