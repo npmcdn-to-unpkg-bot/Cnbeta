@@ -13,7 +13,10 @@ export default class NewEntry extends React.Component {
         const {entry} = this.props;
         const {opened} = this.state;
 
-        const titleClassName = opened ? css(styles.title, styles.titleOpened) : css(styles.title);
+        const titleClassName = opened
+            ? css(styles.title, styles.titleOpened)
+            : css(styles.title);
+
         const summary = opened
             ? <div className={css(styles.summary)} dangerouslySetInnerHTML={createMarkup(entry.summary)}></div>
             : null;
@@ -33,9 +36,11 @@ export default class NewEntry extends React.Component {
     }
 }
 
+const borderColoer = '#E71D36';
+
 const styles = StyleSheet.create({
     container: {
-        border: '2px dashed #E71D36',
+        border: `2px dashed ${borderColoer}`,
         margin: '4px',
     },
     title: {
@@ -46,7 +51,7 @@ const styles = StyleSheet.create({
         padding: '2px 4px',
     },
     titleOpened: {
-        border: '0 dashed #E71D36',
+        border: `0 dashed ${borderColoer}`,
         borderBottomWidth: '2px',
         backgroundColor: '#FFE066',
     },
