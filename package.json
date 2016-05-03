@@ -1,5 +1,5 @@
 {
-  "name": "myapp",
+  "name": "cnbeta",
   "main": "server.js",
   "scripts": {
     "start": "node server",
