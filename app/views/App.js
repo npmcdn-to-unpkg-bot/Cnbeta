@@ -33,7 +33,6 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
     app: {
-        backgroundColor: 'green',
-        border: '2px solid blue',
+        backgroundColor: 'gray'
     }
 });

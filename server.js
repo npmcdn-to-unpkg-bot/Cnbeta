@@ -31,6 +31,7 @@ const parseXml = (xml) => {
   const entries = result
     .findall('./entry')
     .map((node) => ({
+      id: node.findtext('./id'),
       title: node.findtext('./title'),
       link: node.find('./link').get('href'),
       summary: node.findtext('./summary')
