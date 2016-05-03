@@ -2,6 +2,10 @@
   "name": "cnbeta",
   "main": "server.js",
   "version": "0.0.1",
+  "engines": {
+    "node": "^6.0.0",
+    "npm": "^3.8.6"
+  },
   "scripts": {
     "start": "node server",
     "ts": "tsc -p app -w",
