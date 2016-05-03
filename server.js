@@ -36,7 +36,7 @@ const parseXml = (xml) => {
       link: node.find('./link').get('href'),
       summary: node.findtext('./summary')
     }));
-    
+
   return {
     updated,
     entries
@@ -50,7 +50,7 @@ app.get('/rss', (req, res) => {
       res.json({ error });
       return;
     }
-    
+
     const data = parseXml(body);
     res.json({ data });
   });
@@ -94,3 +94,4 @@ app.listen(port, '0.0.0.0', function onStart(err) {
   }
   console.info('==> Listening on port %s. Open up http://0.0.0.0:%s/ in your browser.', port, port);
 });
+
