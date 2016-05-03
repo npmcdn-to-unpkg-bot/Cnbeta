@@ -6,9 +6,7 @@ const createMarkup = (html) => ({__html: html});
 export default class NewEntry extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            opened: false
-        };
+        this.state = { opened: false };
     }
 
     render() {
