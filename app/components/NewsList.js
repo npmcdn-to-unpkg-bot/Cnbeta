@@ -5,7 +5,7 @@ import NewsEntry from './NewsEntry';
 export default ({ entries }) => {
     return (
         <ul className={css(styles.container)}>
-            {entries.map((entry) => <NewsEntry entry={entry} />)}
+            {entries.map((entry, idx) => <NewsEntry entry={entry} isLast={idx===entries.length-1} />)}
         </ul>
     )
 }

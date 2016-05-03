@@ -10,8 +10,12 @@ export default class NewEntry extends React.Component {
     }
 
     render() {
-        const {entry} = this.props;
+        const {entry, isLast} = this.props;
         const {opened} = this.state;
+
+        const containerClassName = isLast
+            ? css(styles.lastContainer)
+            : css(styles.container);
 
         const titleClassName = opened
             ? css(styles.title, styles.titleOpened)
@@ -22,7 +26,7 @@ export default class NewEntry extends React.Component {
             : null;
 
         return (
-            <li className={css(styles.container)}>
+            <li className={containerClassName}>
                 <a className={titleClassName} href="#" onClick={this.toggleTitle.bind(this)}>{entry.title}</a>
                 {summary}
             </li>
@@ -38,10 +42,17 @@ export default class NewEntry extends React.Component {
 
 const borderColoer = '#E71D36';
 
+const containerStyle = {
+    border: `2px dashed ${borderColoer}`,
+    borderBottomWidth: '0',
+    margin: '0',
+};
+
 const styles = StyleSheet.create({
-    container: {
-        border: `2px dashed ${borderColoer}`,
-        margin: '4px',
+    container: containerStyle,
+    lastContainer: {
+        ...containerStyle,
+        borderBottomWidth: '2px',
     },
     title: {
         display: 'flex',
