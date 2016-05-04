@@ -18,7 +18,9 @@ module.exports = {
   externals: {
     "react": 'React',
     "react-dom": "ReactDOM",
-    "aphrodite": "aphrodite"
+    "aphrodite": "aphrodite",
+    "mobx": "mobx",
+    "mobxReact": "mobx-react"
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),

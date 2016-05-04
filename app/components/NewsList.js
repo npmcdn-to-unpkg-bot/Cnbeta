@@ -1,16 +1,11 @@
-import { StyleSheet, css } from 'aphrodite';
+import {observer} from 'mobx-react';
 
 import NewsEntry from './NewsEntry';
 
-export default ({ entries }) => {
+export default observer(function NewsList({entries}) {
     return (
-        <ul className={css(styles.container)}>
+        <ul>
             {entries.map((entry, idx) => <NewsEntry entry={entry} />)}
         </ul>
     )
-}
-
-const styles = StyleSheet.create({
-    container: {
-    },
 });

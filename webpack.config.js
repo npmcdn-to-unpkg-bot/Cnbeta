@@ -5,7 +5,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   entry: [
     'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'app/main.js')
@@ -18,7 +18,9 @@ module.exports = {
   externals: {
     "react": 'React',
     "react-dom": "ReactDOM",
-    "aphrodite": "aphrodite"
+    "aphrodite": "aphrodite",
+    "mobx": "mobx",
+    "mobxReact": "mobx-react"
   },
   plugins: [
     new HtmlWebpackPlugin({

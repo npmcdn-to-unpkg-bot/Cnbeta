@@ -1,9 +1,10 @@
 import React from 'react';
+import {observer} from 'mobx-react';
 import { StyleSheet, css } from 'aphrodite';
 
 const createMarkup = (html) => ({__html: html});
 
-export default class NewEntry extends React.Component {
+class NewEntry extends React.Component {
     constructor(props) {
         super(props);
         this.state = { opened: false };
@@ -35,6 +36,8 @@ export default class NewEntry extends React.Component {
         this.setState({ opened: !opened });
     }
 }
+
+export default observer(NewEntry);
 
 const borderColoer = '#E71D36';
 
