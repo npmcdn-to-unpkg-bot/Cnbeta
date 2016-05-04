@@ -1,16 +1,12 @@
 import ReactDOM from 'react-dom';
 
 import App from './components/App';
+import service from './service';
 import DataStore from './stores/data';
 
 require('./stylesheets/common.css');
 
-const dataStore = new DataStore();
-
-fetch('/rss')
-    .then(res => res.json())
-    .then((json) => {
-        dataStore.entries.push.apply(dataStore.entries, json.data.entries);
-    });
+const dataStore = new DataStore(service);
+dataStore.refresh();
 
 ReactDOM.render(<App dataStore={dataStore} />, document.getElementById('root'));
