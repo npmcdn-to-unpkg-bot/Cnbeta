@@ -10,7 +10,7 @@ p {
     margin: 10px 0;
 }
 
-p img {
+p img, p iframe {
     max-width: 100%;
 }
 
