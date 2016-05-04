@@ -6,6 +6,10 @@
     display: none;
 }
 
+p {
+    margin: 10px 0;
+}
+
 p img {
     max-width: 100%;
 }
@@ -25,5 +29,5 @@ ul {
 }
 
 :global(.article_content .content) {
-    margin-top: 16px;
+    margin-top: 10px;
 }

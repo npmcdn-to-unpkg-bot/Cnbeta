@@ -60,6 +60,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFE066',
     },
     summary: {
-        padding: '16px'
+        padding: '10px'
     }
 });
