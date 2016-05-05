@@ -1,6 +1,7 @@
 import {observer} from 'mobx-react';
 import {StyleSheet, css} from 'aphrodite';
 
+import LoadingIndicator from '../components/LoadingIndicator';
 import NewsList from '../components/NewsList';
 
 const convertLocalDateString = (utc) => {
@@ -16,7 +17,7 @@ export default observer(function App({dataStore}) {
     if (loading) {
         content = (
             <div className={css(styles.indicatorContainer)}>
-                <img src="http://cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif" />
+                <LoadingIndicator size="60px"/>
             </div>
         );
     } else {
