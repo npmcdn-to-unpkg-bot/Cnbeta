@@ -20,7 +20,6 @@ class NewsDetails extends React.Component {
 
         return (
             <div>
-                {createCloseButton(onClick)}
                 <div dangerouslySetInnerHTML={createMarkup(entry ? entry.summary : "")}></div>
                 {createCloseButton(onClick)}
             </div>
