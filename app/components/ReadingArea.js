@@ -20,13 +20,6 @@ class ReadingArea extends React.Component {
         const lastUpdated = convertLocalDateString(dataStore.updated.get());
         const selectedEntry = dataStore.selectedEntry.get();
 
-        const column1 = !selectedEntry
-            ?   <div className={css(styles.column1)}>
-                    <NewsList dataStore={dataStore} />
-                    <div className={css(styles.lastUpdated)}>News updated @ {lastUpdated}</div>
-                </div>
-            : null;
-
         const column2 = selectedEntry
             ?   <div className={css(styles.column2)}>
                     <NewsDetails entry={selectedEntry} onClose={closeDetails.bind(null, dataStore)} />
@@ -35,7 +28,10 @@ class ReadingArea extends React.Component {
 
         return (
             <div className={css(styles.container)}>
-                {column1}
+                <div className={css(styles.column1)}>
+                    <NewsList dataStore={dataStore} />
+                    <div className={css(styles.lastUpdated)}>Last updated @ {lastUpdated}</div>
+                </div>
                 {column2}
             </div>
         )
@@ -54,6 +50,9 @@ const styles = StyleSheet.create({
         //display: 'flex',
     },
     column1: {
+        width: 'calc(100vw - 10px)',
+        height: 'calc(100vh - 10px)',
+        overflowY: 'auto',
     },
     column2: {
         position: 'absolute',

@@ -9,10 +9,6 @@ const close = (onClose, evt) => {
     onClose();
 }
 
-const createCloseButton = (onClick) => {
-    return <a href="#" className={css(styles.closeButton)} onClick={onClick}>✖</a>
-}
-
 class NewsDetails extends React.Component {
     render() {
         const {entry, onClose} = this.props;
@@ -20,8 +16,9 @@ class NewsDetails extends React.Component {
 
         return (
             <div>
+                <h2>{entry.title}</h2>
                 <div dangerouslySetInnerHTML={createMarkup(entry ? entry.summary : "")}></div>
-                {createCloseButton(onClick)}
+                <a href="#" className={css(styles.closeButton)} onClick={onClick}>Back</a>
             </div>
         )
     }
@@ -31,10 +28,13 @@ export default observer(NewsDetails);
 
 const styles = StyleSheet.create({
     closeButton: {
-        textDecoration: "none",
-        fontSize: "28px",
-        float: "right",
-        color: "red",
-        margin: "5px",
+        textDecoration: 'none',
+        fontSize: '22px',
+        marginTop: '6px',
+        padding: '4px',
+        display: 'block',
+        textAlign: 'center',
+        color: '#E71D36',
+        border: `2px solid #E71D36`,
     }
 });
