@@ -3,9 +3,10 @@ import {observable} from 'mobx';
 export default class Store {
     constructor(service) {
         this._servce = service;
+        this.loading = observable(false);
         this.entries = observable(service.readEntries());
         this.updated = observable("");
-        this.loading = observable(false);
+        this.selectedEntry = observable(null);
     }
 
     refresh() {

@@ -10,10 +10,12 @@
   </head>
   <body>
     <div id="root"></div>
+    {% if (o.htmlWebpackPlugin.options.environment != "development") { %}
     <script src="https://fb.me/react-15.0.2.min.js"></script>
     <script src="https://fb.me/react-dom-15.0.2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mobx/2.1.5/mobx.umd.min.js"></script>
     <script src="https://npmcdn.com/mobx-react@3.1.0/index.js"></script>
     <script src="https://npmcdn.com/aphrodite@0.3.1/dist/aphrodite.umd.min.js"></script>
+    {% } %}
   </body>
 </html>

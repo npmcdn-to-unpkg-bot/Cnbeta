@@ -15,18 +15,12 @@ module.exports = {
     filename: '[name].js',
     publicPath: '/'
   },
-  externals: {
-    "react": 'React',
-    "react-dom": "ReactDOM",
-    "aphrodite": "aphrodite",
-    "mobx": "mobx",
-    "mobxReact": "mobx-react"
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: 'app/index.tpl.html',
       inject: 'body',
-      filename: 'index.html'
+      filename: 'index.html',
+      environment: 'development'
     }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),

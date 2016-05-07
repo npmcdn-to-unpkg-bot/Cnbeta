@@ -10,10 +10,6 @@ p {
     margin: 10px 0;
 }
 
-p img, p iframe {
-    max-width: 100%;
-}
-
 p:first-child {
     margin-top: 0;
 }
@@ -30,4 +26,12 @@ ul {
 
 :global(.article_content .content) {
     margin-top: 10px;
+}
+
+:global(.content img) {
+    max-width: 100%;
+}
+
+:global(.content iframe) {
+    max-width: 100%;
 }

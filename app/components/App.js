@@ -1,49 +1,41 @@
+import React from 'react';
 import {observer} from 'mobx-react';
 import {StyleSheet, css} from 'aphrodite';
 
-import LoadingIndicator from '../components/LoadingIndicator';
-import NewsList from '../components/NewsList';
+import LoadingIndicator from './LoadingIndicator';
+import ReadingArea from './ReadingArea';
 
-const convertLocalDateString = (utc) => {
-    const date = new Date(utc);
-    return date.toLocaleString();
+class App extends React.Component {
+    render() {
+        const {dataStore} = this.props;
+        const loading = dataStore.loading.get();
+        let content;
+
+        if (loading) {
+            content = (
+                <div className={css(styles.indicatorContainer)}>
+                    <LoadingIndicator size="60px"/>
+                </div>
+            );
+        } else {
+            content = (
+                <ReadingArea dataStore={dataStore} />
+            );
+        }
+
+        return (
+            <div className={css(styles.app)}>
+                {content}
+            </div>
+        )
+    }
 }
 
-export default observer(function App({dataStore}) {
-    const lastUpdated = convertLocalDateString(dataStore.updated.get());
-    const loading = dataStore.loading.get();
-    let content;
-
-    if (loading) {
-        content = (
-            <div className={css(styles.indicatorContainer)}>
-                <LoadingIndicator size="60px"/>
-            </div>
-        );
-    } else {
-        content = (
-            <div>
-                <NewsList entries={dataStore.entries} />
-                <div className={css(styles.lastUpdated)}>News updated @ {lastUpdated}</div>
-            </div>
-        );
-    }
-
-    return (
-        <div className={css(styles.app)}>
-            {content}
-        </div>
-    )
-});
+export default observer(App);
 
 const styles = StyleSheet.create({
     app: {
         padding: '5px',
-    },
-    lastUpdated: {
-        textAlign: 'right',
-        fontSize: '12px',
-        padding: '2px 0 0',
     },
     indicatorContainer: {
         position: 'absolute',
