@@ -11,7 +11,7 @@ const dataStore = new DataStore(service);
 dataStore.refresh();
 
 window.addEventListener('popstate', (e) => {
-   dataStore.selectedEntry.set(null);
+    dataStore.setSelectedEntry(null);
 });
 
 ReactDOM.render(<App dataStore={dataStore} />, document.getElementById('root'));

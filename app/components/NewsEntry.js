@@ -5,17 +5,11 @@ import { StyleSheet, css } from 'aphrodite';
 const createMarkup = (html) => ({__html: html});
 
 class NewEntry extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {read: false};
-    }
-
     render() {
-        const {entry} = this.props;
-        const {read} = this.state;
+        const {entry, visited} = this.props;
 
-        const titleClassName = read
-            ? css(styles.title, styles.titleRead)
+        const titleClassName = visited
+            ? css(styles.title, styles.titleVisited)
             : css(styles.title);
 
         return (
@@ -28,7 +22,6 @@ class NewEntry extends React.Component {
     toggleTitle(event) {
         event.preventDefault();
         const {entry, onClick} = this.props;
-        this.setState({read: true});
         onClick(entry);
     }
 }
@@ -53,7 +46,7 @@ const styles = StyleSheet.create({
         textDecoration: 'none',
         padding: '2px 6px',
     },
-    titleRead: {
+    titleVisited: {
         color: 'gray'
     },
     summary: {

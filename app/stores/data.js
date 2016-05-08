@@ -4,9 +4,26 @@ export default class Store {
     constructor(service) {
         this._servce = service;
         this.loading = observable(false);
-        this.entries = observable(service.readEntries());
+        this.entries = observable([]);
+        this.visitedEntryIds = observable([]);
         this.updated = observable("");
         this.selectedEntry = observable(null);
+    }
+
+    setSelectedEntry(selectedEntry) {
+        this.selectedEntry.set(selectedEntry);
+        if (selectedEntry) {
+            const {id} = selectedEntry;
+            this._servce.updateHistory(null, null);
+            this._servce.saveVisitedEntryId(id);
+            if (this.visitedEntryIds.indexOf(id) < 0) {
+                this.visitedEntryIds.push(id);
+            }
+        }
+    }
+
+    navigateBack() {
+        this._servce.goBackHistory();
     }
 
     refresh() {
@@ -14,12 +31,15 @@ export default class Store {
 
         this._servce.fetchData()
             .then((json) => {
-                const { error, data } = json;
+                const {error, data} = json;
                 if (error) {
                     // TODO: update error property
                 } else {
-                    this.entries.push.apply(this.entries, data.entries);
-                    this.updated.set(data.updated);
+                    const {entries, updated} = data;
+                    this.updated.set(updated);
+                    this.entries.push(...entries);
+                    const visitedEntryIds = this._servce.updateVisitedEntryIds(entries.map((entry) => entry.id));
+                    this.visitedEntryIds.push(...visitedEntryIds);
                 }
                 this.loading.set(false);
             })

@@ -18,7 +18,7 @@ class ReadingArea extends React.Component {
 
         const column2 = selectedEntry
             ?   <div className={css(styles.column2)}>
-                    <NewsDetails entry={selectedEntry} onClose={() => history.back()} />
+                    <NewsDetails entry={selectedEntry} onClose={() => dataStore.navigateBack()} />
                 </div>
             : null;
 

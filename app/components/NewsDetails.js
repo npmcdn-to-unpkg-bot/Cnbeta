@@ -12,15 +12,13 @@ const close = (onClose, evt) => {
 class NewsDetails extends React.Component {
     render() {
         const {entry, onClose} = this.props;
-        const onClick = close.bind(null, onClose);
-
         return (
             <div>
                 <h2 className={css(styles.title)}>{entry.title}</h2>
                 <div dangerouslySetInnerHTML={createMarkup(entry ? entry.summary : "")}></div>
                 <div className={css(styles.buttonsContainer)}>
                     <a href={entry.link} target="_blank" className={css(styles.goButton)}>Visit cnBeta</a>
-                    <a href="#" className={css(styles.closeButton)} onClick={onClick}>Back</a>
+                    <a href="#" className={css(styles.closeButton)} onClick={close.bind(null, onClose)}>Close</a>
                 </div>
             </div>
         )
