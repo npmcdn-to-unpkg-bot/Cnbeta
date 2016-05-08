@@ -24,13 +24,13 @@ class ReadingArea extends React.Component {
         const selectedEntry = dataStore.selectedEntry.get();
 
         const column2 = selectedEntry
-            ?   <ReactCSSTransitionGroup transitionName="details"
-                    transitionAppear={true} transitionAppearTimeout={250}
-                    transitionEnter={false} transitionLeave={false}>
-                    <div className={css(styles.column2)}>
-                        <NewsDetails entry={selectedEntry} onClose={() => dataStore.navigateBack()} />
-                    </div>
-                </ReactCSSTransitionGroup>
+            ?   <div className={css(styles.column2)}>
+                    <ReactCSSTransitionGroup transitionName="details"
+                        transitionAppear={true} transitionAppearTimeout={250}
+                        transitionEnter={false} transitionLeave={false}>
+                            <NewsDetails entry={selectedEntry} onClose={() => dataStore.navigateBack()} />
+                    </ReactCSSTransitionGroup>
+                </div>
             : null;
 
         return (

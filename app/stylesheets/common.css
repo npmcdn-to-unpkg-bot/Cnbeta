@@ -28,21 +28,18 @@ ul {
     margin-top: 10px;
 }
 
-.content img {
-    max-width: 100%;
-}
-
+.content img,
 .content iframe {
     max-width: 100%;
 }
 
 .details-appear {
-   opacity: 0;
-   transform: translate(0, 40px);
+   opacity: 0.5;
+   transform: translate3d(0, 40px, 0);
 }
 
 .details-appear.details-appear-active {
    opacity: 1;
-   transform: translate(0, 0);
+   transform: translate3d(0, 0, 0);
    transition: 250ms ease;
 }
