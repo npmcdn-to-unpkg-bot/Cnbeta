@@ -5,6 +5,7 @@ import NewsEntry from './NewsEntry';
 
 const onEntryClick = (dataStore, entry) => {
     dataStore.selectedEntry.set(entry);
+    history.pushState(null, null);
 };
 
 class NewsList extends React.Component {

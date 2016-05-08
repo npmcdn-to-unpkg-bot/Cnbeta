@@ -10,10 +10,6 @@ const convertLocalDateString = (utc) => {
     return date.toLocaleString();
 }
 
-const closeDetails = (dataStore) => {
-    dataStore.selectedEntry.set(null);
-}
-
 class ReadingArea extends React.Component {
     render() {
         const {dataStore} = this.props;
@@ -22,7 +18,7 @@ class ReadingArea extends React.Component {
 
         const column2 = selectedEntry
             ?   <div className={css(styles.column2)}>
-                    <NewsDetails entry={selectedEntry} onClose={closeDetails.bind(null, dataStore)} />
+                    <NewsDetails entry={selectedEntry} onClose={() => history.back()} />
                 </div>
             : null;
 

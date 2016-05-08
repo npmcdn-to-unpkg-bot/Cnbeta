@@ -10,4 +10,8 @@ require('./stylesheets/common.css');
 const dataStore = new DataStore(service);
 dataStore.refresh();
 
+window.addEventListener('popstate', (e) => {
+   dataStore.selectedEntry.set(null);
+});
+
 ReactDOM.render(<App dataStore={dataStore} />, document.getElementById('root'));
