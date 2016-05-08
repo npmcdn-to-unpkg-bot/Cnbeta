@@ -18,6 +18,7 @@ module.exports = {
   externals: {
     "react": 'React',
     "react-dom": "ReactDOM",
+    "react-addons-css-transition-group": "ReactCSSTransitionGroup",
     "aphrodite": "aphrodite",
     "mobx": "mobx",
     "mobxReact": "mobx-react"

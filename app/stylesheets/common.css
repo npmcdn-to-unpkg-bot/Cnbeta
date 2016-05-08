@@ -35,3 +35,14 @@ ul {
 .content iframe {
     max-width: 100%;
 }
+
+.details-appear {
+   opacity: 0;
+   transform: translate(0, 40px);
+}
+
+.details-appear.details-appear-active {
+   opacity: 1;
+   transform: translate(0, 0);
+   transition: 250ms ease;
+}

@@ -2,6 +2,13 @@ import React from 'react';
 import {observer} from 'mobx-react';
 import {StyleSheet, css} from 'aphrodite';
 
+let ReactCSSTransitionGroup;
+try {
+    ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+} catch (error) {
+    ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+}
+
 import NewsList from './NewsList';
 import NewsDetails from './NewsDetails';
 
@@ -17,9 +24,13 @@ class ReadingArea extends React.Component {
         const selectedEntry = dataStore.selectedEntry.get();
 
         const column2 = selectedEntry
-            ?   <div className={css(styles.column2)}>
-                    <NewsDetails entry={selectedEntry} onClose={() => dataStore.navigateBack()} />
-                </div>
+            ?   <ReactCSSTransitionGroup transitionName="details"
+                    transitionAppear={true} transitionAppearTimeout={250}
+                    transitionEnter={false} transitionLeave={false}>
+                    <div className={css(styles.column2)}>
+                        <NewsDetails entry={selectedEntry} onClose={() => dataStore.navigateBack()} />
+                    </div>
+                </ReactCSSTransitionGroup>
             : null;
 
         return (
