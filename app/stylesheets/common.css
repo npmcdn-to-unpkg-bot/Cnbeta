@@ -24,14 +24,14 @@ ul {
     padding: 0;
 }
 
-:global(.article_content .content) {
+.article_content .content {
     margin-top: 10px;
 }
 
-:global(.content img) {
+.content img {
     max-width: 100%;
 }
 
-:global(.content iframe) {
+.content iframe {
     max-width: 100%;
 }
