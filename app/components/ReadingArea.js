@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     column1: {
         width: 'calc(100vw - 10px)',
         height: 'calc(100vh - 10px)',
+        padding: '5px',
         overflowY: 'auto',
     },
     column2: {

@@ -12,7 +12,9 @@ class NewsList extends React.Component {
         const {dataStore} = this.props;
         return (
             <ul>
-                {dataStore.entries.map((entry, idx) => <NewsEntry key={entry.id} entry={entry} onClick={onEntryClick.bind(null, dataStore)} />)}
+                {dataStore.entries.map(
+                    (entry, idx) => <NewsEntry key={entry.id} entry={entry} onClick={onEntryClick.bind(null, dataStore)} />
+                )}
             </ul>
         )
     }

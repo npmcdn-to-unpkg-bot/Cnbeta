@@ -24,7 +24,7 @@ class App extends React.Component {
         }
 
         return (
-            <div className={css(styles.app)}>
+            <div>
                 {content}
             </div>
         )
@@ -34,9 +34,6 @@ class App extends React.Component {
 export default observer(App);
 
 const styles = StyleSheet.create({
-    app: {
-        padding: '5px',
-    },
     indicatorContainer: {
         position: 'absolute',
         top: 0,

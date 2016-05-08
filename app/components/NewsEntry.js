@@ -7,7 +7,7 @@ const createMarkup = (html) => ({__html: html});
 class NewEntry extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { read: false };
+        this.state = {read: false};
     }
 
     render() {
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         padding: '2px 6px',
     },
     titleRead: {
-        opacity: "0.5"
+        color: 'gray'
     },
     summary: {
         padding: '10px'

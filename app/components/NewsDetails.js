@@ -16,7 +16,7 @@ class NewsDetails extends React.Component {
 
         return (
             <div>
-                <h2>{entry.title}</h2>
+                <h2 className={css(styles.title)}>{entry.title}</h2>
                 <div dangerouslySetInnerHTML={createMarkup(entry ? entry.summary : "")}></div>
                 <a href="#" className={css(styles.closeButton)} onClick={onClick}>Back</a>
             </div>
@@ -27,14 +27,17 @@ class NewsDetails extends React.Component {
 export default observer(NewsDetails);
 
 const styles = StyleSheet.create({
+    title: {
+        marginTop: 0,
+    },
     closeButton: {
         textDecoration: 'none',
-        fontSize: '22px',
-        marginTop: '6px',
-        padding: '4px',
+        fontSize: '20px',
+        marginTop: '10px',
+        padding: '10px',
         display: 'block',
         textAlign: 'center',
-        color: '#E71D36',
-        border: `2px solid #E71D36`,
+        color: 'white',
+        backgroundColor: '#E71D36',
     }
 });
