@@ -18,7 +18,10 @@ class NewsDetails extends React.Component {
             <div>
                 <h2 className={css(styles.title)}>{entry.title}</h2>
                 <div dangerouslySetInnerHTML={createMarkup(entry ? entry.summary : "")}></div>
-                <a href="#" className={css(styles.closeButton)} onClick={onClick}>Back</a>
+                <div className={css(styles.buttonsContainer)}>
+                    <a href={entry.link} target="_blank" className={css(styles.goButton)}>Visit cnBeta</a>
+                    <a href="#" className={css(styles.closeButton)} onClick={onClick}>Back</a>
+                </div>
             </div>
         )
     }
@@ -26,18 +29,29 @@ class NewsDetails extends React.Component {
 
 export default observer(NewsDetails);
 
+const buttonStyle = {
+    textDecoration: 'none',
+    fontSize: '20px',
+    marginTop: '5px',
+    padding: '10px',
+    display: 'block',
+    textAlign: 'center',
+    color: 'white',
+}
+
 const styles = StyleSheet.create({
     title: {
         marginTop: 0,
     },
-    closeButton: {
-        textDecoration: 'none',
-        fontSize: '20px',
+    buttonsContainer: {
         marginTop: '10px',
-        padding: '10px',
-        display: 'block',
-        textAlign: 'center',
-        color: 'white',
+    },
+    closeButton: {
+        ...buttonStyle,
         backgroundColor: '#E71D36',
+    },
+    goButton: {
+        ...buttonStyle,
+        backgroundColor: '#2EC4B6'
     }
 });
