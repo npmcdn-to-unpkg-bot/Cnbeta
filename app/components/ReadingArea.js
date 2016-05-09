@@ -28,7 +28,7 @@ class ReadingArea extends React.Component {
                     <ReactCSSTransitionGroup transitionName="details"
                         transitionAppear={true} transitionAppearTimeout={250}
                         transitionEnter={false} transitionLeave={false}>
-                            <NewsDetails entry={selectedEntry} onClose={() => dataStore.navigateBack()} />
+                            <NewsDetails key={selectedEntry.id} entry={selectedEntry} onClose={() => dataStore.navigateBack()} />
                     </ReactCSSTransitionGroup>
                 </div>
             : null;
