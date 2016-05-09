@@ -37,19 +37,25 @@ class NewsDetails extends React.Component {
 
         addEventListeners({
             'touchstart': (evt) => {
+                const touch = evt.changedTouches[0];
                 startPoint = {
-                    x: evt.changedTouches[0].clientX,
+                    x: touch.clientX,
+                    y: touch.clientY,
                     timeStamp: evt.timeStamp
                 };
             },
             'touchend': (evt) => {
+                const touch = evt.changedTouches[0];
                 const endPoint = {
-                    x: evt.changedTouches[0].clientX,
+                    x: touch.clientX,
+                    y: touch.clientY,
                     timeStamp: evt.timeStamp
                 };
                 const xDistance = endPoint.x - startPoint.x;
+                const yDistance = endPoint.y - startPoint.y;
                 const duration = endPoint.timeStamp - startPoint.timeStamp;
-                if (Math.abs(xDistance) > 60 && duration < 150) {
+                //alert(`${Math.abs(yDistance)} ${xDistance} ${duration}`);
+                if (Math.abs(yDistance) < 50 && xDistance > 80 && duration < 200) {
                     onClose();
                 }
             },

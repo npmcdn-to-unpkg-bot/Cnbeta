@@ -25,11 +25,7 @@ class ReadingArea extends React.Component {
 
         const column2 = selectedEntry
             ?   <div className={css(styles.column2)}>
-                    <ReactCSSTransitionGroup transitionName="details"
-                        transitionAppear={true} transitionAppearTimeout={250}
-                        transitionEnter={false} transitionLeave={false}>
-                            <NewsDetails key={selectedEntry.id} entry={selectedEntry} onClose={() => dataStore.navigateBack()} />
-                    </ReactCSSTransitionGroup>
+                    <NewsDetails key={selectedEntry.id} entry={selectedEntry} onClose={() => dataStore.navigateBack()} />
                 </div>
             : null;
 
@@ -39,7 +35,14 @@ class ReadingArea extends React.Component {
                     <NewsList dataStore={dataStore} />
                     <div className={css(styles.lastUpdated)}>Last updated @ {lastUpdated}</div>
                 </div>
-                {column2}
+                <ReactCSSTransitionGroup
+                        transitionName="details"
+                        transitionEnterTimeout={250}
+                        transitionLeaveTimeout={250}
+                        transitionEnter={true}
+                        transitionLeave={true}>
+                    {column2}
+                </ReactCSSTransitionGroup>
             </div>
         )
     }

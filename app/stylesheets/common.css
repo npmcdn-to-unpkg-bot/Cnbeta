@@ -33,13 +33,24 @@ ul {
     max-width: 100%;
 }
 
-.details-appear {
-    opacity: 0.5;
+.details-enter {
+    opacity: 0;
     transform: translate3d(40px, 0, 0);
 }
 
-.details-appear.details-appear-active {
+.details-enter.details-enter-active {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+    transition: 250ms ease;
+}
+
+.details-leave {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.details-leave.details-leave-active {
+    opacity: 0;
+    transform: translate3d(40px, 0, 0);
     transition: 250ms ease;
 }
