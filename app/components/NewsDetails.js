@@ -7,13 +7,13 @@ const createMarkup = (html) => ({__html: html});
 const close = (onClose, evt) => {
     evt.preventDefault();
     onClose();
-}
+};
 
 class NewsDetails extends React.Component {
     render() {
         const {entry, onClose} = this.props;
         return (
-            <div>
+            <div ref={(c) => this._root = c}>
                 <h2 className={css(styles.title)}>{entry.title}</h2>
                 <div dangerouslySetInnerHTML={createMarkup(entry ? entry.summary : "")}></div>
                 <div className={css(styles.buttonsContainer)}>
@@ -22,6 +22,38 @@ class NewsDetails extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    componentDidMount() {
+        const {onClose} = this.props;
+
+        const addEventListeners = (listeners) => {
+            Object.keys(listeners).forEach((eventName) => {
+                this._root.addEventListener(eventName, listeners[eventName], false);
+            });
+        };
+
+        let startPoint;
+
+        addEventListeners({
+            'touchstart': (evt) => {
+                startPoint = {
+                    x: evt.changedTouches[0].clientX,
+                    timeStamp: evt.timeStamp
+                };
+            },
+            'touchend': (evt) => {
+                const endPoint = {
+                    x: evt.changedTouches[0].clientX,
+                    timeStamp: evt.timeStamp
+                };
+                const xDistance = endPoint.x - startPoint.x;
+                const duration = endPoint.timeStamp - startPoint.timeStamp;
+                if (Math.abs(xDistance) > 60 && duration < 150) {
+                    onClose();
+                }
+            },
+        });
     }
 }
 

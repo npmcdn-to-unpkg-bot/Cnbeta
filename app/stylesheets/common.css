@@ -35,7 +35,7 @@ ul {
 
 .details-appear {
     opacity: 0.5;
-    transform: translate3d(0, 40px, 0);
+    transform: translate3d(40px, 0, 0);
 }
 
 .details-appear.details-appear-active {
