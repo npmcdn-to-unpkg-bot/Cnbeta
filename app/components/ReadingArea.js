@@ -15,7 +15,9 @@ import NewsDetails from './NewsDetails';
 const convertLocalDateString = (utc) => {
     const date = new Date(utc);
     return date.toLocaleString();
-}
+};
+
+const transitionTimeout = 250;
 
 class ReadingArea extends React.Component {
     render() {
@@ -25,7 +27,12 @@ class ReadingArea extends React.Component {
 
         const column2 = selectedEntry
             ?   <div className={css(styles.column2)}>
-                    <NewsDetails key={selectedEntry.id} entry={selectedEntry} onClose={() => dataStore.navigateBack()} />
+                    <NewsDetails
+                        key={selectedEntry.id}
+                        contentDelay={transitionTimeout}
+                        entry={selectedEntry}
+                        onClose={() => dataStore.navigateBack()}
+                    />
                 </div>
             : null;
 
@@ -37,8 +44,8 @@ class ReadingArea extends React.Component {
                 </div>
                 <ReactCSSTransitionGroup
                         transitionName="details"
-                        transitionEnterTimeout={250}
-                        transitionLeaveTimeout={250}
+                        transitionEnterTimeout={transitionTimeout}
+                        transitionLeaveTimeout={transitionTimeout}
                         transitionEnter={true}
                         transitionLeave={true}>
                     {column2}

@@ -25,11 +25,19 @@ class NewsDetails extends React.Component {
     }
 
     componentDidMount() {
-        const {onClose} = this.props;
+        const {onClose, contentDelay} = this.props;
+        const root = this._root;
+
+        // It is effective to ensure smooth transition on mobile device
+        const content = root.querySelector('.content');
+        content.style.visibility = "hidden";
+        this._contentTimer = setTimeout(() => {
+            content.style.visibility = "visible";
+        }, contentDelay);
 
         const addEventListeners = (listeners) => {
             Object.keys(listeners).forEach((eventName) => {
-                this._root.addEventListener(eventName, listeners[eventName], false);
+                root.addEventListener(eventName, listeners[eventName], false);
             });
         };
 
@@ -55,11 +63,15 @@ class NewsDetails extends React.Component {
                 const yDistance = endPoint.y - startPoint.y;
                 const duration = endPoint.timeStamp - startPoint.timeStamp;
                 //alert(`${Math.abs(yDistance)} ${xDistance} ${duration}`);
-                if (Math.abs(yDistance) < 50 && xDistance > 80 && duration < 200) {
+                if (Math.abs(yDistance) < 50 && xDistance > 80 && duration < 250) {
                     onClose();
                 }
             },
         });
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this._contentTimer);
     }
 }
 
