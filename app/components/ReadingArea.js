@@ -18,6 +18,7 @@ const convertLocalDateString = (utc) => {
 };
 
 const transitionTimeout = 250;
+const detailsContentDelay = transitionTimeout + 50;
 
 class ReadingArea extends React.Component {
     render() {
@@ -29,7 +30,7 @@ class ReadingArea extends React.Component {
             ?   <div className={css(styles.column2)}>
                     <NewsDetails
                         key={selectedEntry.id}
-                        contentDelay={transitionTimeout}
+                        contentDelay={detailsContentDelay}
                         entry={selectedEntry}
                         onClose={() => dataStore.navigateBack()}
                     />
