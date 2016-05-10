@@ -10,16 +10,26 @@ const close = (onClose, evt) => {
 };
 
 class NewsDetails extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {buttonsVisible: false};
+    }
+
     render() {
         const {entry, onClose} = this.props;
+        const {buttonsVisible} = this.state;
+        const buttons = buttonsVisible
+            ?   <div className={css(styles.buttonsContainer)}>
+                    <a href={entry.link} target="_blank" className={css(styles.goButton)}>Visit cnBeta</a>
+                    <a href="#" className={css(styles.closeButton)} onClick={close.bind(null, onClose)}>Close</a>
+                </div>
+            :   null;
+
         return (
             <div ref={(c) => this._root = c}>
                 <h2 className={css(styles.title)}>{entry.title}</h2>
                 <div dangerouslySetInnerHTML={createMarkup(entry ? entry.summary : "")}></div>
-                <div className={css(styles.buttonsContainer)}>
-                    <a href={entry.link} target="_blank" className={css(styles.goButton)}>Visit cnBeta</a>
-                    <a href="#" className={css(styles.closeButton)} onClick={close.bind(null, onClose)}>Close</a>
-                </div>
+                {buttons}
             </div>
         )
     }
@@ -28,11 +38,12 @@ class NewsDetails extends React.Component {
         const {onClose, contentDelay} = this.props;
         const root = this._root;
 
-        // It is effective to ensure smooth transition on mobile device
+        // It is critical to ensure smooth transition on mobile device
         const content = root.querySelector('.content');
-        content.style.visibility = "hidden";
+        content.style.display = "none";
         this._contentTimer = setTimeout(() => {
-            content.style.visibility = "visible";
+            content.style.display = "block";
+            this.setState({buttonsVisible: true});
         }, contentDelay);
 
         const addEventListeners = (listeners) => {
