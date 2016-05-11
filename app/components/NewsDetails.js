@@ -2,6 +2,8 @@ import React from 'react';
 import {observer} from 'mobx-react';
 import { StyleSheet, css } from 'aphrodite';
 
+import Touchable from './Touchable';
+
 const createMarkup = (html) => ({__html: html});
 
 const close = (onClose, evt) => {
@@ -26,59 +28,25 @@ class NewsDetails extends React.Component {
             :   null;
 
         return (
-            <div ref={(c) => this._root = c}>
+            <Touchable onRightSwipe={onClose}>
                 <h2 className={css(styles.title)}>{entry.title}</h2>
-                <div dangerouslySetInnerHTML={createMarkup(entry ? entry.summary : "")}></div>
+                <div ref={(elm) => this._summary = elm} dangerouslySetInnerHTML={createMarkup(entry ? entry.summary : "")}></div>
                 {buttons}
-            </div>
+            </Touchable>
         )
     }
 
     componentDidMount() {
-        const {onClose, contentDelay} = this.props;
-        const root = this._root;
+        const {contentDelay} = this.props;
 
         // It is critical to ensure smooth transition on mobile device
-        const content = root.querySelector('.content');
+        const content = this._summary.querySelector('.content');
         content.style.display = "none";
+
         this._contentTimer = setTimeout(() => {
             content.style.display = "block";
             this.setState({buttonsVisible: true});
         }, contentDelay);
-
-        const addEventListeners = (listeners) => {
-            Object.keys(listeners).forEach((eventName) => {
-                root.addEventListener(eventName, listeners[eventName], false);
-            });
-        };
-
-        let startPoint;
-
-        addEventListeners({
-            'touchstart': (evt) => {
-                const touch = evt.changedTouches[0];
-                startPoint = {
-                    x: touch.clientX,
-                    y: touch.clientY,
-                    timeStamp: evt.timeStamp
-                };
-            },
-            'touchend': (evt) => {
-                const touch = evt.changedTouches[0];
-                const endPoint = {
-                    x: touch.clientX,
-                    y: touch.clientY,
-                    timeStamp: evt.timeStamp
-                };
-                const xDistance = endPoint.x - startPoint.x;
-                const yDistance = endPoint.y - startPoint.y;
-                const duration = endPoint.timeStamp - startPoint.timeStamp;
-                //alert(`${Math.abs(yDistance)} ${xDistance} ${duration}`);
-                if (Math.abs(yDistance) < 50 && xDistance > 80 && duration < 250) {
-                    onClose();
-                }
-            },
-        });
     }
 
     componentWillUnmount() {
