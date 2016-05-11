@@ -4,6 +4,12 @@ import { StyleSheet, css } from 'aphrodite';
 
 const createMarkup = (html) => ({__html: html});
 
+const toggleTitle = (props, event) => {
+    event.preventDefault();
+    const {entry, onClick} = props;
+    onClick(entry);
+};
+
 class NewEntry extends React.Component {
     render() {
         const {entry, visited} = this.props;
@@ -14,15 +20,9 @@ class NewEntry extends React.Component {
 
         return (
             <li className={css(styles.container)}>
-                <a className={titleClassName} href="#" onClick={this.toggleTitle.bind(this)}>{entry.title}</a>
+                <a className={titleClassName} href="#" onClick={toggleTitle.bind(null, this.props)}>{entry.title}</a>
             </li>
         )
-    }
-
-    toggleTitle(event) {
-        event.preventDefault();
-        const {entry, onClick} = this.props;
-        onClick(entry);
     }
 }
 
