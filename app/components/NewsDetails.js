@@ -64,6 +64,7 @@ const buttonStyle = {
     display: 'block',
     textAlign: 'center',
     color: 'white',
+    borderRadius: '4px',
 }
 
 const styles = StyleSheet.create({

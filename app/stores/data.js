@@ -30,21 +30,23 @@ export default class Store {
         this.loading.set(true);
 
         this._servce.fetchData()
-            .then((json) => {
-                const {error, data} = json;
-                if (error) {
-                    // TODO: update error property
-                } else {
-                    const {entries, updated} = data;
-                    this.updated.set(updated);
-                    this.entries.push(...entries);
-                    const visitedEntryIds = this._servce.updateVisitedEntryIds(entries.map((entry) => entry.id));
-                    this.visitedEntryIds.push(...visitedEntryIds);
+            .then(
+                (json) => {
+                    const {error, data} = json;
+                    if (error) {
+                        // TODO: update error property
+                    } else {
+                        const {entries, updated} = data;
+                        this.updated.set(updated);
+                        this.entries.push(...entries);
+                        const visitedEntryIds = this._servce.updateVisitedEntryIds(entries.map((entry) => entry.id));
+                        this.visitedEntryIds.push(...visitedEntryIds);
+                    }
+                    this.loading.set(false);
+                },
+                () => {
+                    this.loading.set(false);
                 }
-                this.loading.set(false);
-            })
-            .catch(() => {
-                this.loading.set(false);
-            });
+            );
     }
 }

@@ -1,3 +1,5 @@
+import request from './request';
+
 const visitedEntryIdsKey = "visitedEntryIds";
 
 const save = (key, value) => {
@@ -32,7 +34,7 @@ const updateVisitedEntryIds = (entryIds) => {
     return ids;
 };
 
-const fetchData = () => fetch('/rss').then(res => res.json());
+const fetchData = () => request.get('/rss');
 
 const updateHistory = (data, title, url) => {
     history.pushState(data, title, url);
