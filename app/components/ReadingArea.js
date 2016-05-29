@@ -22,12 +22,12 @@ const detailsContentDelay = transitionTimeout + 50;
 
 class ReadingArea extends React.Component {
     render() {
-        const {dataStore} = this.props;
+        const {dataStore, themeClassName} = this.props;
         const lastUpdated = convertLocalDateString(dataStore.updated.get());
         const selectedEntry = dataStore.selectedEntry.get();
 
         const column2 = selectedEntry
-            ?   <div className={css(styles.column2)}>
+            ?   <div className={`${css(styles.column2)} ${themeClassName}`}>
                     <NewsDetails
                         key={selectedEntry.id}
                         contentDelay={detailsContentDelay}
@@ -65,7 +65,6 @@ const styles = StyleSheet.create({
         padding: '2px 0 0',
     },
     container: {
-        //display: 'flex',
     },
     column1: {
         width: 'calc(100vw - 10px)',
@@ -80,7 +79,6 @@ const styles = StyleSheet.create({
         width: 'calc(100vw - 20px)',
         height: 'calc(100vh - 20px)',
         padding: '10px',
-        backgroundColor: 'white',
         overflowY: 'auto'
     }
 });

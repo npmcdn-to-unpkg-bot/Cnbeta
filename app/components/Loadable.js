@@ -3,12 +3,14 @@ import {StyleSheet, css} from 'aphrodite';
 
 import LoadingIndicator from './LoadingIndicator';
 
+const indicatorColor = '#E71D36';
+
 export default class Loadable extends React.Component {
     render() {
-        const {loading, indicatorSize, children} = this.props;
+        const {loading, indicatorSize, children, themeClassName} = this.props;
         const content = loading
-            ?   <div className={css(styles.indicatorContainer)}>
-                    <LoadingIndicator size={indicatorSize} />
+            ?   <div className={`${css(styles.indicatorContainer)} ${themeClassName}`}>
+                    <LoadingIndicator size={indicatorSize} color={indicatorColor} />
                 </div>
             :   children;
 

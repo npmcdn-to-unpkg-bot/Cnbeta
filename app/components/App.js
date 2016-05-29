@@ -9,10 +9,14 @@ class App extends React.Component {
         const {dataStore} = this.props;
         const loading = dataStore.loading.get();
 
+        const themeClassName = 'dark'; //light
+
         return (
-            <Loadable loading={loading} indicatorSize="60px">
-                <ReadingArea dataStore={dataStore} />
-            </Loadable>
+            <div className={themeClassName}>
+                <Loadable loading={loading} indicatorSize="60px" themeClassName={themeClassName}>
+                    <ReadingArea dataStore={dataStore} themeClassName={themeClassName}/>
+                </Loadable>
+            </div>
         )
     }
 }
