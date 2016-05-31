@@ -51,7 +51,20 @@ ul {
     transition: 250ms ease;
 }
 
-/* Themes */
+/* Common Themes */
+
+.loadingblock {
+    fill: #E71D36;
+}
+
+.entrycontainer {
+    border: 2px dashed #E71D36;
+    border-bottom-width: 0;
+}
+
+.entrycontainer:last-child {
+    border-bottom-width: 2px;
+}
 
 /* Light theme */
 
@@ -66,10 +79,6 @@ ul {
     color: rgb(1, 22, 39);
 }
 
-.light .loadingblock {
-    fill: #E71D36;
-}
-
 .light .loadingindicatorcontainer,
 .light .readingcolumn2 {
     background: white;
@@ -77,15 +86,6 @@ ul {
 
 .light .visitedtitle {
     color: rgba(1, 27, 39, 0.5);
-}
-
-.light .entrycontainer {
-    border: 2px dashed #E71D36;
-    border-bottom-width: 0;
-}
-
-.light .entrycontainer:last-child {
-    border-bottom-width: 2px;
 }
 
 /* Dark theme */
@@ -101,10 +101,6 @@ ul {
     color: rgb(153, 153, 153);
 }
 
-.dark .loadingblock {
-    fill: #E71D36;
-}
-
 .dark .loadingindicatorcontainer,
 .dark .readingcolumn2 {
     background: #00070e;
@@ -112,13 +108,4 @@ ul {
 
 .dark .visitedtitle {
     color: rgba(153, 153, 153, 0.5);
-}
-
-.dark .entrycontainer {
-    border: 2px dashed #E71D36;
-    border-bottom-width: 0;
-}
-
-.dark .entrycontainer:last-child {
-    border-bottom-width: 2px;
 }
