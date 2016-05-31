@@ -15,11 +15,11 @@ class NewEntry extends React.Component {
         const {entry, visited} = this.props;
 
         const titleClassName = visited
-            ? css(styles.title, styles.titleVisited)
+            ? `${css(styles.title)} visitedtitle`
             : css(styles.title);
 
         return (
-            <li className={css(styles.container)}>
+            <li className={`${css(styles.container)} entrycontainer`}>
                 <a className={titleClassName} href="#" onClick={toggleTitle.bind(null, this.props)}>{entry.title}</a>
             </li>
         )
@@ -28,16 +28,9 @@ class NewEntry extends React.Component {
 
 export default observer(NewEntry);
 
-const borderColoer = '#E71D36';
-
 const styles = StyleSheet.create({
     container: {
-        border: `2px dashed ${borderColoer}`,
-        borderBottomWidth: '0',
         margin: '0',
-        ':last-child': {
-            borderBottomWidth: '2px',
-        },
     },
     title: {
         display: 'flex',
@@ -45,9 +38,6 @@ const styles = StyleSheet.create({
         minHeight: '40px',
         textDecoration: 'none',
         padding: '2px 6px',
-    },
-    titleVisited: {
-        color: 'gray'
     },
     summary: {
         padding: '10px'

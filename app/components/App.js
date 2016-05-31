@@ -1,5 +1,6 @@
 import React from 'react';
 import {observer} from 'mobx-react';
+import {StyleSheet, css} from 'aphrodite';
 
 import Loadable from './Loadable';
 import ReadingArea from './ReadingArea';
@@ -8,13 +9,12 @@ class App extends React.Component {
     render() {
         const {dataStore} = this.props;
         const loading = dataStore.loading.get();
-
-        const themeClassName = 'dark'; //light
+        const theme = dataStore.theme.get();
 
         return (
-            <div className={themeClassName}>
-                <Loadable loading={loading} indicatorSize="60px" themeClassName={themeClassName}>
-                    <ReadingArea dataStore={dataStore} themeClassName={themeClassName}/>
+            <div className={theme}>
+                <Loadable loading={loading} indicatorSize="60px">
+                    <ReadingArea dataStore={dataStore} />
                 </Loadable>
             </div>
         )

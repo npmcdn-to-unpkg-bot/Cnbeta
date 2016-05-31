@@ -8,6 +8,7 @@ export default class Store {
         this.visitedEntryIds = observable([]);
         this.updated = observable("");
         this.selectedEntry = observable(null);
+        this.theme = observable("dark");
     }
 
     setSelectedEntry(selectedEntry) {

@@ -22,12 +22,12 @@ const detailsContentDelay = transitionTimeout + 50;
 
 class ReadingArea extends React.Component {
     render() {
-        const {dataStore, themeClassName} = this.props;
+        const {dataStore} = this.props;
         const lastUpdated = convertLocalDateString(dataStore.updated.get());
         const selectedEntry = dataStore.selectedEntry.get();
 
         const column2 = selectedEntry
-            ?   <div className={`${css(styles.column2)} ${themeClassName}`}>
+            ?   <div className={`${css(styles.column2)} readingcolumn2`}>
                     <NewsDetails
                         key={selectedEntry.id}
                         contentDelay={detailsContentDelay}
