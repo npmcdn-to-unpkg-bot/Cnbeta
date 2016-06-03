@@ -9,9 +9,7 @@ const save = (key, value) => {
     }
 };
 
-const read = (key) => {
-    return localStorage.getItem(key);
-};
+const read = (key) => localStorage.getItem(key);
 
 const getVisitedEntryIds = () => {
     const data = read(visitedEntryIdsKey);
@@ -36,18 +34,8 @@ const updateVisitedEntryIds = (entryIds) => {
 
 const fetchData = () => request.get('/rss');
 
-const updateHistory = (data, title, url) => {
-    history.pushState(data, title, url);
-};
-
-const goBackHistory = () => {
-    history.back();
-};
-
 export default {
     saveVisitedEntryId,
     updateVisitedEntryIds,
     fetchData,
-    updateHistory,
-    goBackHistory,
 }

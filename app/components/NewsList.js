@@ -15,7 +15,6 @@ class NewsList extends React.Component {
                             key={entry.id}
                             entry={entry}
                             visited={visitedEntryIds.indexOf(entry.id) >= 0}
-                            onClick={(theEntry) => dataStore.setSelectedEntry(theEntry)}
                         />
                     )
                 )}

@@ -11,11 +11,15 @@ export default class Store {
         this.theme = observable("dark");
     }
 
-    setSelectedEntry(selectedEntry) {
-        this.selectedEntry.set(selectedEntry);
-        if (selectedEntry) {
-            const {id} = selectedEntry;
-            this._servce.updateHistory(null, null);
+    setSelectedEntryById(id) {
+        if (!id) {
+            this.selectedEntry.set(null);
+            return;
+        }
+
+        const entry = this.entries.find((entry) => entry.id === id);
+        if (entry) {
+            this.selectedEntry.set(entry);
             this._servce.saveVisitedEntryId(id);
             if (this.visitedEntryIds.indexOf(id) < 0) {
                 this.visitedEntryIds.push(id);
@@ -23,14 +27,14 @@ export default class Store {
         }
     }
 
-    navigateBack() {
-        this._servce.goBackHistory();
+    goHome() {
+        location.hash = "";
     }
 
-    refresh() {
+    refresh(onSuccess) {
         this.loading.set(true);
 
-        this._servce.fetchData()
+        return this._servce.fetchData()
             .then(
                 (json) => {
                     const {error, data} = json;
@@ -44,6 +48,7 @@ export default class Store {
                         this.visitedEntryIds.push(...visitedEntryIds);
                     }
                     this.loading.set(false);
+                    onSuccess();
                 },
                 () => {
                     this.loading.set(false);

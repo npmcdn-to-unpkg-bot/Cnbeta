@@ -32,7 +32,7 @@ class ReadingArea extends React.Component {
                         key={selectedEntry.id}
                         contentDelay={detailsContentDelay}
                         entry={selectedEntry}
-                        onClose={() => dataStore.navigateBack()}
+                        onClose={() => dataStore.goHome()}
                     />
                 </div>
             : null;

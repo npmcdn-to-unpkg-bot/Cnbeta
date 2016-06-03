@@ -7,11 +7,18 @@ import DataStore from './stores/data';
 
 require('./stylesheets/common.css');
 
-const dataStore = new DataStore(service);
-dataStore.refresh();
+const setSelectedEntryFromUri = (store) => {
+    const entryId = location.hash.slice(1);
+    store.setSelectedEntryById(entryId);
+}
 
-window.addEventListener('popstate', (e) => {
-    dataStore.setSelectedEntry(null);
+const dataStore = new DataStore(service);
+dataStore.refresh(() => {
+    setSelectedEntryFromUri(dataStore);
+});
+
+window.addEventListener('hashchange', (e) => {
+    setSelectedEntryFromUri(dataStore);
 });
 
 ReactDOM.render(<App dataStore={dataStore} />, document.getElementById('root'));
