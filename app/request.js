@@ -49,5 +49,10 @@ function pegasus(a, xhr) {
 }
 
 export default {
-    get: pegasus
+  get: (url) => new Promise((resolve, reject) => {
+    pegasus(url).then(
+      (data) => resolve(data),
+      (error) => reject(error)
+    )
+  })
 }

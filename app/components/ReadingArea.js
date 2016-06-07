@@ -44,11 +44,11 @@ class ReadingArea extends React.Component {
                     <div className={css(styles.lastUpdated)}>Last updated @ {lastUpdated}</div>
                 </div>
                 <ReactCSSTransitionGroup
-                        transitionName="details"
-                        transitionEnterTimeout={transitionTimeout}
-                        transitionLeaveTimeout={transitionTimeout}
-                        transitionEnter={true}
-                        transitionLeave={true}>
+                    transitionName="details"
+                    transitionEnterTimeout={transitionTimeout}
+                    transitionLeaveTimeout={transitionTimeout}
+                    transitionEnter={true}
+                    transitionLeave={true}>
                     {column2}
                 </ReactCSSTransitionGroup>
             </div>

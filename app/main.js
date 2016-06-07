@@ -13,9 +13,10 @@ const setSelectedEntryFromUri = (store) => {
 }
 
 const dataStore = new DataStore(service);
-dataStore.refresh(() => {
-    setSelectedEntryFromUri(dataStore);
-});
+dataStore.refresh()
+    .then(() => {
+        setSelectedEntryFromUri(dataStore);
+    });
 
 window.addEventListener('hashchange', (e) => {
     setSelectedEntryFromUri(dataStore);

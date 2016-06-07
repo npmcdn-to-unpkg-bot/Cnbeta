@@ -1,4 +1,6 @@
-import {observable} from 'mobx';
+import {useStrict, observable, action} from 'mobx';
+
+useStrict(true);
 
 export default class Store {
     constructor(service) {
@@ -12,47 +14,48 @@ export default class Store {
     }
 
     setSelectedEntryById(id) {
-        if (!id) {
-            this.selectedEntry.set(null);
-            return;
-        }
-
-        const entry = this.entries.find((entry) => entry.id === id);
-        if (entry) {
-            this.selectedEntry.set(entry);
-            this._servce.saveVisitedEntryId(id);
-            if (this.visitedEntryIds.indexOf(id) < 0) {
-                this.visitedEntryIds.push(id);
+        action(() => {
+            if (!id) {
+                this.selectedEntry.set(null);
+                return;
             }
-        }
+
+            const entry = this.entries.find((entry) => entry.id === id);
+            if (entry) {
+                this.selectedEntry.set(entry);
+                this._servce.saveVisitedEntryId(id);
+                if (this.visitedEntryIds.indexOf(id) < 0) {
+                    this.visitedEntryIds.push(id);
+                }
+            }
+        })();
     }
 
     goHome() {
         location.hash = "";
     }
 
-    refresh(onSuccess) {
-        this.loading.set(true);
-
-        return this._servce.fetchData()
-            .then(
-                (json) => {
+    refresh() {
+        return action(() => {
+            this.loading.set(true);
+            return this._servce.fetchData()
+                .then(action((json) => {
                     const {error, data} = json;
+
                     if (error) {
-                        // TODO: update error property
-                    } else {
-                        const {entries, updated} = data;
-                        this.updated.set(updated);
-                        this.entries.push(...entries);
-                        const visitedEntryIds = this._servce.updateVisitedEntryIds(entries.map((entry) => entry.id));
-                        this.visitedEntryIds.push(...visitedEntryIds);
+                        throw new Error(error);
                     }
+
+                    const {entries, updated} = data;
+                    this.updated.set(updated);
+                    this.entries.push(...entries);
+                    const visitedEntryIds = this._servce.updateVisitedEntryIds(entries.map((entry) => entry.id));
+                    this.visitedEntryIds.push(...visitedEntryIds);
                     this.loading.set(false);
-                    onSuccess();
-                },
-                () => {
+                }))
+                .catch(action(() => {
                     this.loading.set(false);
-                }
-            );
+                }));
+        })();
     }
 }
