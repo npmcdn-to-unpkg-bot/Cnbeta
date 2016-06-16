@@ -1,6 +1,7 @@
 import React from 'react';
+import {observable, action} from 'mobx';
 import {observer} from 'mobx-react';
-import { StyleSheet, css } from 'aphrodite';
+import {StyleSheet, css} from 'aphrodite';
 
 import Touchable from './Touchable';
 
@@ -11,16 +12,17 @@ const close = (onClose, evt) => {
     onClose();
 };
 
+const executeAction = (fn) => action(fn)();
+
 class NewsDetails extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {buttonsVisible: false};
+        this.buttonsVisible = observable(false);
     }
 
     render() {
         const {entry, onClose} = this.props;
-        const {buttonsVisible} = this.state;
-        const buttons = buttonsVisible
+        const buttons = this.buttonsVisible.get()
             ?   <div className={css(styles.buttonsContainer)}>
                     <a href={entry.link} target="_blank" className={css(styles.goButton)}>Visit cnBeta</a>
                     <a href="#" className={css(styles.closeButton)} onClick={close.bind(null, onClose)}>Close</a>
@@ -45,7 +47,7 @@ class NewsDetails extends React.Component {
 
         this._contentTimer = setTimeout(() => {
             content.style.display = "block";
-            this.setState({buttonsVisible: true});
+            executeAction(() => this.buttonsVisible.set(true));
         }, contentDelay);
     }
 

@@ -2,6 +2,8 @@ import {useStrict, observable, action} from 'mobx';
 
 useStrict(true);
 
+const executeAction = (fn) => action(fn)();
+
 export default class Store {
     constructor(service) {
         this._servce = service;
@@ -14,7 +16,7 @@ export default class Store {
     }
 
     setSelectedEntryById(id) {
-        action(() => {
+        executeAction(() => {
             if (!id) {
                 this.selectedEntry.set(null);
                 return;
@@ -28,7 +30,7 @@ export default class Store {
                     this.visitedEntryIds.push(id);
                 }
             }
-        })();
+        });
     }
 
     goHome() {
@@ -36,7 +38,7 @@ export default class Store {
     }
 
     refresh() {
-        return action(() => {
+        return executeAction(() => {
             this.loading.set(true);
             return this._servce.fetchData()
                 .then(action((json) => {
@@ -56,6 +58,6 @@ export default class Store {
                 .catch(action(() => {
                     this.loading.set(false);
                 }));
-        })();
+        });
     }
 }
